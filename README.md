@@ -12,3 +12,4 @@ Nosso objetivo é responder as seguintes perguntas:
 * Você é capaz de criar interfaces limpas e de fácil uso?
 * Você é capaz de entender e melhorar um código legado?
 * Você consegue escrever testes automatizado?
+* Qual seu nível de criação de abstrações?
