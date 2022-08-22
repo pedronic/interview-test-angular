@@ -1,11 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import {
   NgxFileDropEntry,
   FileSystemFileEntry,
   FileSystemDirectoryEntry,
 } from 'ngx-file-drop';
+import IAppointment from './models/appointment.interface';
+import Channel from './models/channel.model';
+import Schedule from './models/schedule.model';
+import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -14,14 +18,18 @@ import {
 })
 export class AppComponent implements OnInit {
   public files: NgxFileDropEntry[] = [];
-  public channels: any = [];
-  public schedules: any = [];
-  public schedulePeriod = null;
-  public selectedChannel = null;
-  public displayedColumns = ['type', 'status', 'image', 'channel', 'date'];
+  public channels: Array<Channel> = [];
+  public schedules: Array<Schedule> = [];
+  public schedulePeriod: any = { start_date: null, end_date: null};
+  public selectedChannel: Channel = null;
+  public displayedColumns: string[] = ['type', 'status', 'image', 'channel', 'date'];
+  public title: string;
   private form: FormGroup;
 
-  public constructor(private http: HttpClient) {
+  public constructor(
+    private http: HttpClient,
+    private api: ApiService
+    ) {
     this.form = new FormBuilder().group({
       channel: null,
       image: null,
@@ -32,13 +40,13 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
     this.form.patchValue({ type: 'feed' });
-    this.http.get('api/channels').subscribe((channels) => {
+    this.api.getChannels().subscribe((channels) => {
       this.selectedChannel = channels[0];
       this.channels = channels;
       this.form.patchValue({ channel: channels[0] });
     });
 
-    this.http.get('api/schedules').subscribe((scheduleResponse: any) => {
+    this.api.getSchedules().subscribe((scheduleResponse: any) => {
       this.schedulePeriod = {
         start_date: scheduleResponse.start_date,
         end_date: scheduleResponse.end_date,
@@ -53,13 +61,22 @@ export class AppComponent implements OnInit {
   }
 
   public schedule() {
-    if (!this.form.valid) return; // TODO: give feedback
-    this.http
-      .post('api/schedules', this.form.value, { responseType: 'json' })
+    if (!this.form.valid) {
+      return;
+      // TODO: give feedback
+    }
+    console.log("form.value\n",this.form.value)
+    let body:IAppointment = {
+      channel: this.form.value.channel,
+      date: this.form.value.date,
+      image: this.form.value.image,
+      type: this.form.value.type,
+    }
+    this.api.postSchedules(body)
       .subscribe((data) => {
         this.form.reset();
         this.files = [];
-        this.http.get('api/schedules').subscribe((scheduleResponse: any) => {
+        this.api.getSchedules().subscribe((scheduleResponse: any) => {
           this.schedulePeriod = {
             start_date: scheduleResponse.start_date,
             end_date: scheduleResponse.end_date,

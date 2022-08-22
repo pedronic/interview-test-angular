@@ -54,7 +54,7 @@ export const scheduleFactory = (data) => ({
   status: 'waiting',
   now: false,
   date: data.date,
-  caption: 'Lorem ipsom',
+  caption: 'Lorem ipsum',
   ig_code: null,
   is_history: false,
   is_album: false,

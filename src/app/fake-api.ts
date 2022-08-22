@@ -142,7 +142,7 @@ export const channels = [
       full_name: 'frodo bolseiro',
       is_private: false,
       profile_pic_url:
-        'https://scontent-lhr8-1.cdninstagram.com/v/t51.2885-19/s150x150/82155853_495819618006168_2122337653864005632_n.jpg?tp=1&_nc_ht=scontent-lhr8-1.cdninstagram.com&_nc_ohc=a825I9qCm68AX_rao5-&ccb=7-4&oh=7fc2bb2204e3d74e41dad4bb7afb4a76&oe=608C68B9&_nc_sid=a9513d',
+        'http://3.bp.blogspot.com/-Dg3syK8BmUE/VPjU-pOVfSI/AAAAAAAABUM/z2EER1uCgKM/s1600/Frodo_Baggins.jpg',
       profile_pic_id: '2226409004837873329_28449666129',
       is_verified: false,
       has_anonymous_profile_picture: false,
