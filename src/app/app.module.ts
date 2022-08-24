@@ -13,7 +13,29 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
+import { registerLocaleData } from '@angular/common';
+import localePT from '@angular/common/locales/pt';
+registerLocaleData(localePT);
+
+const MaterialModules = [MatCardModule,
+  MatChipsModule,
+  MatTabsModule,
+  MatListModule,
+  MatTableModule,
+  MatIconModule,
+  MatButtonModule,
+  MatFormFieldModule,
+  MatDatepickerModule,
+  MatNativeDateModule
+]
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -24,10 +46,10 @@ import { MatTableModule } from '@angular/material/table';
     HttpClientInMemoryWebApiModule.forRoot(ScheduleAPIService, { delay: 500 }),
     BrowserAnimationsModule,
     FlexLayoutModule,
-
-    MatTabsModule,
-    MatListModule,
-    MatTableModule,
+    ...MaterialModules
+  ],
+  exports: [
+    ...MaterialModules
   ],
   providers: [],
   bootstrap: [AppComponent],

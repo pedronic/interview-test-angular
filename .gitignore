@@ -33,6 +33,7 @@ speed-measure-plugin*.json
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+.editorconfig
 
 # misc
 /.angular/cache
@@ -49,3 +50,5 @@ testem.log
 .DS_Store
 Thumbs.db
 .vscode/settings.json
+.editorconfig
+.editorconfig

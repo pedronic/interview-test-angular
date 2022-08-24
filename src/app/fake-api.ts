@@ -270,7 +270,7 @@ export const channels = [
       full_name: 'Gandalf do Sertão',
       is_private: false,
       profile_pic_url:
-        'https://scontent-sjc3-1.cdninstagram.com/v/t51.2885-19/s150x150/50790055_395297557698545_3563850225976082432_n.jpg?tp=1&_nc_ht=scontent-sjc3-1.cdninstagram.com&_nc_ohc=02nyJhluxWYAX-YFtlv&ccb=7-4&oh=a11120c9a8f69c992440a8ac48a6d011&oe=608E5156&_nc_sid=a9513d',
+        'https://www.maisnovela.com.br/wp-content/uploads/2022/05/velho-do-rio-osmar-prado-pantanal-.jpg',
       profile_pic_id: '1973459391250053171_11050249559',
       is_verified: false,
       has_anonymous_profile_picture: false,

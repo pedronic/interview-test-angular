@@ -1,160 +1,221 @@
-<div fxLayout="column" fxLayoutGap="40px">
-  <header class="page-header" fxFlex="100px" fxLayout="row">
-    <section fxFlex="20%">
-      <div>
-        <figure class="profile-thumbnail">
-          <img src={{selectedChannel?.user.profile_pic_url}} width="85px" />
-          <figcaption class="profile-thumbnail-label">
-            <div class="fa-label-content">
-              <div>{{ selectedChannel?.user.username }}</div>
-            </div>
-            <div class="profile-details">
-              <div class="profile-details__influencer-level ng-binding">
-                {{ selectedChannel?.user.follower_count }} Followers |
-                {{ selectedChannel?.user.following_count }} Following
-              </div>
-              <div
-                class="profile-details__business-info ng-binding ng-hide"
-                *ngIf="selectedChannel?.user.is_business"
-              >
-                Business Profile
-              </div>
-            </div>
-          </figcaption>
-        </figure>
+<div class="container" fxLayout="column" fxLayoutGap="40px">
+  <div class="row">
+    <header class="page-header col-10 col-md-12">
+      <div class="profile-card" aria-label="Perfil de Usuário ">
+        <div class="profile-card-img">
+          <img
+            src="{{ selectedChannel?.user.profile_pic_url }}"
+            width="85px"
+            alt="Foto do perfil"
+          />
+        </div>
+        <div class="profile-card-name" aria-label="Nome ">
+          {{ selectedChannel?.user.username }}
+        </div>
+        <div class="profile-card-info" aria-label="Seguidores e seguindo ">
+          {{ selectedChannel?.user.follower_count }} Followers<br />
+          {{ selectedChannel?.user.following_count }} Following
+        </div>
+        <div
+          class="profile-card-info"
+          *ngIf="selectedChannel?.user.is_business"
+          aria-label="Perfil Profissional "
+        >
+          Business Profile
+        </div>
       </div>
-    </section>
 
-    <nav class="nav navbar-nav navbar-profiles" fxFlex>
-      <div class="navbar-profiles-item-wrap">
-        <a *ngFor="let channel of channels" (click)="selectChannel(channel)">
-          <figure class="profile-thumbnail">
+      <nav class="nav navbar-nav navbar-profiles" fxFlex>
+        <div class="navbar-profiles-item-wrap">
+          <a *ngFor="let channel of channels" (click)="selectChannel(channel)">
             <div class="profile-thumbnail-avatar">
-              <img src={{channel.user.profile_pic_url}} />
+              <img
+                class="checkered"
+                src="{{ channel?.user.profile_pic_url }}"
+                alt="{{ channel?.user.username }}"
+              />
             </div>
-          </figure>
-        </a>
-      </div>
-    </nav>
-  </header>
+          </a>
+        </div>
+      </nav>
+    </header>
+  </div>
 
-  <div fxFlex fxLayout="row">
-    <section fxFlex="500px">
-      <div>
-        Agendamentos de {{ schedulePeriod?.start_date | date }} até
-        {{ schedulePeriod?.end_date | date }}
-      </div>
-      <table mat-table [dataSource]="schedules" class="mat-elevation-z8">
-        <ng-container matColumnDef="type">
-          <th mat-header-cell *matHeaderCellDef>Target</th>
-          <td mat-cell *matCellDef="let element">{{ element.type }}</td>
-        </ng-container>
+  <div class="content col-12" fxFlex>
+    <mat-card class="schedule-container col-6 col-md-12">
+      <mat-card-header>
+        <mat-card-subtitle>
+          <div>
+            Agendamentos de
+              <strong>
+                {{
+                  schedulePeriod?.start_date
+                    | date
+                      : DATE_FORMAT.format
+                      : DATE_FORMAT.timezone
+                      : DATE_FORMAT.locale
+                }}
+              </strong>
+              até
+              <strong>
+                {{
+                  schedulePeriod?.end_date
+                    | date
+                      : DATE_FORMAT.format
+                      : DATE_FORMAT.timezone
+                      : DATE_FORMAT.locale
+                }}
+              </strong>
+          </div>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="table-container">
+        <table
+          mat-table
+          [dataSource]="schedules"
+          class="mat-elevation-z8 col-md-12 col-12"
+          style="width: 100%"
+          matSort
+        >
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Target</th>
+            <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef>status</th>
-          <td mat-cell *matCellDef="let element">{{ element.status }}</td>
-        </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+            <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="image">
-          <th mat-header-cell *matHeaderCellDef>image</th>
-          <td mat-cell *matCellDef="let element">
-            <img src={{element.image.url}} width="40px" />
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="image">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Imagem</th>
+            <td mat-cell *matCellDef="let element">
+              <img src="{{ element.image.url }}" width="40px" />
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="channel">
-          <th mat-header-cell *matHeaderCellDef>channel</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.channel.username }}
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="channel">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Canal</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.channel.username }}
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef>date</th>
-          <td mat-cell *matCellDef="let element">{{ element.date | date }}</td>
-        </ng-container>
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Data</th>
+            <td mat-cell *matCellDef="let element">
+              {{
+                element.date
+                  | date: "short":DATE_FORMAT.timezone:DATE_FORMAT.locale
+              }}
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
-    </section>
+          <tr
+            mat-header-row
+            *matHeaderRowDef="displayedColumns; sticky: true"
+          ></tr>
+          <tr
+            class="table-row"
+            mat-row
+            *matRowDef="let row; columns: displayedColumns"
+          ></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
 
-    <section fxFlex>
-      <button mat-button (click)="schedule()">Agendar</button>
+    <div class="schedule col-6 col-md-12" fxFlex>
       <mat-tab-group (selectedTabChange)="changeTab($event)">
         <mat-tab label="Novo post">
-          <div class="center">
+          <div class="tab-body center">
             <ngx-file-drop
-              dropZoneLabel="Drop files here"
+              dropZoneClassName="file-drop-zone"
               (onFileDrop)="dropped($event)"
-              (onFileOver)="fileOver($event)"
-              (onFileLeave)="fileLeave($event)"
+              accept="image/*"
             >
               <ng-template
                 ngx-file-drop-content-tmp
                 let-openFileSelector="openFileSelector"
               >
-                Imagem
-                <button type="button" (click)="openFileSelector()">
-                  Browse Files
+                <button
+                  class="file-drop-button"
+                  type="button"
+                  (click)="openFileSelector()"
+                >
+                  <mat-icon
+                    class="file-drop-button-icon"
+                    aria-hidden="false"
+                    aria-label="Example home icon"
+                    fontIcon="file_upload"
+                    >file_upload</mat-icon
+                  >
+                  <br />
+                  <h3 class="file-drop-button-label">Browse or Drop Files</h3>
                 </button>
               </ng-template>
             </ngx-file-drop>
-            <div class="upload-table">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                  </tr>
-                </thead>
-                <tbody class="upload-name-style">
-                  <tr *ngFor="let item of files; let i = index">
-                    <td>
-                      <strong>{{ item.relativePath }}</strong>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <h4 class="file-names">Name:</h4>
+            <div class="table-container upload-table col-11">
+              <mat-chip-list>
+                <mat-chip
+                  class="chips"
+                  *ngFor="let item of files; let i = index"
+                  (removed)="files.splice(i, 1)"
+                >
+                  {{ item.relativePath }}
+                  <button matChipRemove>x</button></mat-chip
+                >
+              </mat-chip-list>
             </div>
           </div>
         </mat-tab>
         <mat-tab label="Novo Story">
-          <div class="center">
+          <div class="tab-body center">
             <ngx-file-drop
-              dropZoneLabel="Drop files here"
+              dropZoneClassName="file-drop-zone"
               (onFileDrop)="dropped($event)"
-              (onFileOver)="fileOver($event)"
-              (onFileLeave)="fileLeave($event)"
+              accept="image/*"
             >
               <ng-template
                 ngx-file-drop-content-tmp
                 let-openFileSelector="openFileSelector"
               >
-                Imagem
-                <button type="button" (click)="openFileSelector()">
-                  Browse Files
+                <button
+                  class="file-drop-button"
+                  type="button"
+                  (click)="openFileSelector()"
+                >
+                  <mat-icon
+                    class="file-drop-button-icon"
+                    aria-hidden="false"
+                    aria-label="Example home icon"
+                    fontIcon="file_upload"
+                    >file_upload</mat-icon
+                  >
+                  <br />
+                  <h3 class="file-drop-button-label">Browse or Drop Files</h3>
                 </button>
               </ng-template>
             </ngx-file-drop>
-            <div class="upload-table">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                  </tr>
-                </thead>
-                <tbody class="upload-name-style">
-                  <tr *ngFor="let item of files; let i = index">
-                    <td>
-                      <strong>{{ item.relativePath }}</strong>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <h4 class="file-names">Name:</h4>
+            <div class="table-container upload-table col-11">
+              <mat-chip-list>
+                <mat-chip
+                  class="chips"
+                  *ngFor="let item of files; let i = index"
+                  (removed)="files.splice(i, 1)"
+                >
+                  {{ item.relativePath }}
+                  <button matChipRemove>x</button></mat-chip
+                >
+              </mat-chip-list>
             </div>
           </div>
         </mat-tab>
       </mat-tab-group>
-    </section>
+      <div class="action-button">
+        <button mat-raised-button (click)="schedule()">Agendar</button>
+      </div>
+    </div>
   </div>
 </div>
