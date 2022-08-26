@@ -2,7 +2,6 @@ export default class Channel {
   id: number;
   user: User;
   status: string;
-
 }
 
 interface User {

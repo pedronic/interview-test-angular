@@ -1,6 +1,7 @@
-.container {
+$header-pic-width: 85px;
+.container, .container>form {
   margin: 0 10px 0 0;
-  padding: 0 0 1.5em 0;
+  padding: 0 0 1.5em 0 !important;
   height: 100%;
   background-color: white;
   position: absolute;
@@ -14,7 +15,7 @@
     display: grid !important;
     overflow-y: auto !important;
     overflow-x: clip !important;
-    // width: calc(100vw - 10px);
+    padding-bottom: 1.5em !important;
   }
 }
 
@@ -79,6 +80,10 @@
     max-width: calc(100vw - 120px - 25px - 14px - 5px) !important;
   }
 }
+::ng-deep.mat-button-toggle-label-content {
+  display: grid !important;
+  justify-items: center !important;
+}
 
 .navbar-profiles-item,
 .navbar-profiles .profile-thumbnail {
@@ -98,13 +103,16 @@
   display: grid;
   max-width: 150px;
   min-width: 85px;
-  @media (max-width: 576px)  {
+  @media (max-width: 576px) {
     width: 120px;
   }
 
   &-img {
     display: inherit;
     justify-items: center;
+    img {
+      width: $header-pic-width;
+    }
   }
 
   &-name {
@@ -223,11 +231,7 @@
     margin-top: 0.7em !important;
   }
 }
-.profile-thumbnail-avatar.small {
-  width: 29px;
-  height: 29px;
-}
-// .profile-thumbnail
+
 .checkered {
   background: -webkit-linear-gradient(
       45deg,
@@ -292,19 +296,38 @@
 small {
   font-size: 85%;
 }
-
-.profile-thumbnail-avatar.small > img {
-  width: 29px;
-  height: 29px;
-}
-.profile-thumbnail-avatar > img {
-  width: 64px;
-  height: 64px;
-  border: 1px solid #d2d0d0;
-  border-radius: 50%;
+.profile-thumbnail-avatar {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  &.small {
+    width: 29px;
+    height: 29px;
+  }
+  &.small > img {
+    width: 29px;
+    height: 29px;
+  }
+  & > img {
+    width: 64px;
+    height: 64px;
+    border: 1px solid #d2d0d0;
+    border-radius: 50%;
+  }
 }
 .chips {
   line-height: 1em;
+  height: fit-content;
+  &-button {
+    word-wrap: break-word;
+    max-width: calc($header-pic-width * 2 / 3);
+    padding: 0;
+    background: transparent;
+    border: transparent;
+    img {
+      width: calc($header-pic-width * 2 / 3);
+      object-fit: contain;
+    }
+  }
 }
 
 ::ng-deep.mat-chip-list-wrapper {
@@ -325,8 +348,14 @@ small {
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 768px) {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  @media (max-width: 400px) {
+    flex-direction: column;
+  }
 }
-
 
 .tab-body {
   margin-top: 5px !important;
@@ -338,7 +367,8 @@ small {
   background-color: transparent;
   margin-top: -5px;
   cursor: pointer;
-  &-label,&-icon {
+  &-label,
+  &-icon {
     color: rgb(80, 113, 129);
   }
 }
