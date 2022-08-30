@@ -8,5 +8,5 @@ Trata-se da aquisição das imagens de perfil do instagram através do link dire
 
 Outro exemplo seria a implementação real das funcionalidades de agendamento de postagens, bem como a visualização dos agendamentos e posteriormente, como melhoria praticamente obrigatória da interface visual, a implementação de um filtro para seleção de datas no card de visualização de agendamentos.
 
-Ou seja, para entrar em produção de fato ainda restariam etapas de integração com o backend, que no caso está mockado.
+Ou seja, para entrar em produção de fato ainda restariam etapas de integração com o backend, que no caso está mockado, e possivelmente a criação/adição de uma página de login.
 
