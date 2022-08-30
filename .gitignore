@@ -24,14 +24,19 @@ speed-measure-plugin*.json
 *.sublime-workspace
 
 # IDE - VSCode
+*.vscode/settings.json
 .vscode/*
+/.vscode/*
+/.vscode/settings.json
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+*.editorconfig
 
 # misc
+/.angular/cache
 /.sass-cache
 /connect.lock
 /coverage
@@ -44,3 +49,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+.vscode/settings.json
+

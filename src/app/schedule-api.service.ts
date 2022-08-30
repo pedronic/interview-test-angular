@@ -34,7 +34,7 @@ export class ScheduleAPIService implements InMemoryDbService {
   private createSchedule(reqInfo) {
     const body = reqInfo.utils.getJsonBody(reqInfo.req);
 
-    console.log({ body });
+    console.log("POST.req.body\n",{ body });
     this.schedules.data.push(scheduleFactory(body));
 
     const options: ResponseOptions = {
@@ -54,7 +54,7 @@ export const scheduleFactory = (data) => ({
   status: 'waiting',
   now: false,
   date: data.date,
-  caption: 'Lorem ipsom',
+  caption: 'Lorem ipsum',
   ig_code: null,
   is_history: false,
   is_album: false,
