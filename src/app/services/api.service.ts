@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import IAppointment from '../models/appointment.interface';
+import Channel from '../models/channel.model';
 
 @Injectable({
   providedIn: 'root',

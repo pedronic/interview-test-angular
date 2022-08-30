@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
       channel: [null, []],
       image: [[], []],
       type: ['', []],
-      date: [null, []],
+      date: [{value:null, disabled:true}, []],
     });
   }
 
@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
       }
     });
     this._api.getSchedules().subscribe({
-      next: (scheduleResponse: any) => {
+      next: (scheduleResponse) => {
         this.schedulePeriod = {
           start_date: scheduleResponse.start_date,
           end_date: scheduleResponse.end_date,
@@ -183,7 +183,7 @@ export class AppComponent implements OnInit {
     if(this.form?.get('type').value === ''){
       return true;
     }
-    if(this.form?.get('image').value === []){
+    if(this.form?.get('image').value.length === 0){
       return true;
     }
     return false;

@@ -45,7 +45,7 @@
                   />
                 </div>
                 <div mat-label class="profile-card-name" aria-label="Nome ">
-                  {{ channel?.user.username }}
+                  <a class="profile-card-name-link" [href]="'https://www.instagram.com/'+channel?.user.username" target="_blank">{{ channel?.user.username }}</a>
                 </div>
               </mat-button-toggle>
             </mat-button-toggle-group>
@@ -54,7 +54,7 @@
       </header>
     </div>
 
-    <div class="content col-12" fxFlex>
+    <div class="content col-12 mb-2" fxFlex>
       <mat-card class="schedule-container col-6 col-md-12">
         <mat-card-header>
           <mat-card-subtitle>
@@ -240,7 +240,6 @@
               [matDatepicker]="picker"
               [min]="TODAY"
               formControlName="date"
-              [disabled]="true"
             />
             <mat-datepicker-toggle matSuffix [for]="picker">
             </mat-datepicker-toggle>

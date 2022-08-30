@@ -2,6 +2,11 @@ export default class Channel {
   id: number;
   user: User;
   status: string;
+  constructor(object?: Partial<Channel>){
+    this.id = object?.id;
+    this.user = object?.user;
+    this.status = object?.status;
+  }
 }
 
 interface User {

@@ -17,6 +17,25 @@ export default class Schedule {
   image: Image;
   channel: IChannel;
   socials: any[];
+  constructor(object?: Partial<Schedule>){
+    this.id = object?.id;
+    this.created_at = object?.created_at;
+    this.status = object?.status;
+    this.now = object?.now;
+    this.date = object?.date;
+    this.caption = object?.caption;
+    this.ig_code = object?.ig_code;
+    this.is_history = object?.is_history;
+    this.is_album = object?.is_album;
+    this.is_igtv = object?.is_igtv;
+    this.is_reels = object?.is_reels;
+    this.ig_image_url = object?.ig_image_url;
+    this.type = object?.type;
+    this.media_type = object?.media_type;
+    this.image = object?.image;
+    this.channel = object?.channel;
+    this.socials = object?.socials;
+  }
 }
 
 interface IChannel {
